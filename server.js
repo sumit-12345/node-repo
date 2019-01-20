@@ -1,6 +1,9 @@
 
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 app.get('/abc/:name', function (req, res) {
     let name=req.params.name
@@ -31,9 +34,11 @@ var server = app.listen(8081, function () {
    
    console.log("Example app listening at http://%s:%s", host, port)
 })
-
 app.post('/saveData',(req,res)=>{
-    res.send('Data saved.')
+    console.log(req.body)
+    setTimeout(()=>{
+        res.send('Data Has been saved')
+    },5000)
 })
 
  let getData=()=>{

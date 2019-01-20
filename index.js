@@ -10,12 +10,8 @@ app.post()
 app.put() 
 app.delete()
 
-//Hello Tarun.
 const server=app.listen('9999',()=>{
     // const address=server.address().address
     // const port=server.address().port
     console.log('Listining to port no. 9999')
 })
-
-
-//abcdmjhjgjgjgj

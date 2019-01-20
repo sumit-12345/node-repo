@@ -2,6 +2,9 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+const db=require('./model/index1')
+let emp=db.Employee
+
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
@@ -34,11 +37,27 @@ var server = app.listen(8081, function () {
    
    console.log("Example app listening at http://%s:%s", host, port)
 })
+db.sequelize.sync({force:true})
+
 app.post('/saveData',(req,res)=>{
     console.log(req.body)
-    setTimeout(()=>{
-        res.send('Data Has been saved')
-    },5000)
+        emp.create(req.body).then((data)=>{
+            let empData=[]
+            emp.findAll().then(d=>{
+                // d.forEach(element => {
+                //     empData.push(element.dataValues)
+                // });
+                for(let i=0;i<d.length;i++){
+                    empData[i]=d[i].dataValues
+                }
+            }).then(()=>{
+                res.status(200)
+                res.send(`has added. ${JSON.stringify(empData)}`)
+            })
+           
+        }).catch((err)=>{
+            console.log('error',err)
+        })
 })
 
  let getData=()=>{

@@ -1,0 +1,12 @@
+module.exports={
+    developement:{
+        username:'root',
+        password:'mitu.1234',
+        database:'test',
+        host:'127.0.0.1',
+        dialect:'mysql'
+    },
+    qa:{},
+    staging:{},
+    production:{}
+}

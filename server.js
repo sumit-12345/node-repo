@@ -41,7 +41,7 @@ db.sequelize.sync({force:true})
 
 app.post('/saveData',(req,res)=>{
     console.log(req.body)
-        emp.create(req.body).then((data)=>{
+        emp.bulkCreate(req.body).then((data)=>{
             let empData=[]
             emp.findAll().then(d=>{
                 // d.forEach(element => {
